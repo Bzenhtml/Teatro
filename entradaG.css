@@ -1,0 +1,27 @@
+body{
+    background-color: darkblue;
+}
+.divisor{
+    border-radius: 10px;
+color:  darkblue;
+    background-color: whitesmoke;
+    text-align: center;
+    border-style: groove;
+    margin: auto;
+    width: 80%;
+  height: 550px;
+    margin-top: 20px;}
+    
+.divMini{
+    margin: auto;
+    margin-left: 370px ;
+    text-align: center;
+    width: 40%;
+ margin-top: 40px;
+    border-radius: 10px;
+    border-style: double;
+    border-color: darkblue;
+}
+header{
+    text-align: center;
+}

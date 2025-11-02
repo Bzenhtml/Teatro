@@ -1,0 +1,32 @@
+header{
+
+    text-align: center;
+}
+body{
+    text-align: center;
+    background-color: rgb(233, 223, 199);
+}
+h2{
+    color: rgb(75, 46, 15);
+    margin-top: 20px;
+}
+form{
+    background-color: rgb(75, 46, 15);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    color: white;
+}
+h1{
+    color: rgb(75, 46, 15);
+text-align: center;
+}
+button{
+    background-color: rgb(233, 223, 199);
+    color: rgb(75, 46, 15);
+    size: 20px;
+    border-radius: 5px;
+}
