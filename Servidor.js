@@ -5,8 +5,14 @@ const operaciones=require('./ModuloPersonas/Personas');
 const operacionesEP=require('./Modulo_entradas/palco');
 const operacionesEG=require('./Modulo_entradas/gradería');
 const operacionesEPL=require('./Modulo_entradas/platea');
+const path = require('path');
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'Admin')));
 
+
+app.get('/administrador', (req, res) => {
+res.sendFile(path.join(__dirname, 'Admin', 'administrador.html'));
+});
 //-PERSONAS-
 app.get('/personas',(req,res)=>{
     const personas=operaciones.listarPersonas();
@@ -105,6 +111,7 @@ app.put('/actualizarEG/:id',(req,res)=>{
         res.status(404).json({error:'Entrada no encontrada'});
     }   
 });
+
 app.delete('/eliminarG/:id',(req,res)=>{
     const id = parseInt(req.params.id); 
     const exito=operacionesEG.EliminarEG(id);
@@ -123,10 +130,12 @@ app.get('/entradasPL',(req,res)=>{
     const PLATEA=operacionesEPL.ObtenerEPL();
     res.json(PLATEA);
 });
-app.post('/agregarPL', (req, res) => {
-   
+app.post('/agregarPL', async (req, res) => {
+   const { nombre, telefono, correo, direccion } = req.body;
     operacionesEPL.AgregarEPL(req.body);
     res.json({ mensaje: 'Entrada ingresada correctamente' });
+      const html = await generarHTML(nombre, telefono, correo, direccion);
+          fs.writeFileSync(filePath, html, 'utf8');
 });
 
     
@@ -150,7 +159,7 @@ app.delete('/eliminarPL/:id',(req,res)=>{
         res.status(404).json({error:'Hubo un error al eliminar la entrada'});
     }
 });  
-async function generarHTML(nombre, telefono, correo, direccion, imagenUrl) {
+async function generarHTML(nombre, telefono, correo, direccion) {
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -199,6 +208,5 @@ async function generarHTML(nombre, telefono, correo, direccion, imagenUrl) {
   `;
 }
 
-app.listen(port,()=>{
-    console.log(`Servidor escuchando en http://localhost:${port}/admin.html`);
-}   );
+app.listen(port, () => 
+    console.log(`Servidor corriendo en http://localhost:${port}/administrador`));
