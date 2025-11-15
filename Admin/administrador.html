@@ -20,9 +20,9 @@
     <h5> Nombre</h5>
     <input type="text" name="nombre" id="nombre"required> 
      <h5> Apellido Paterno</h5>
-    <input type="text" name="nombre" id="ApellidoP"required> 
+    <input type="text" name="ApellidoP" id="ApellidoP"required> 
    <h5> Apellido Materno</h5>
-    <input type="text" name="nombre" id="ApellidoM"required> 
+    <input type="text" name="ApellidoM" id="ApellidoM"required> 
     <h5> Telefono</h5>
     <input type="text" name="telefono" id="telefono" required>
     <h5> Correo</h5>
@@ -30,14 +30,82 @@
     <h5> Fecha de nacimiento </h5>
     <input type="date" >
      <h5>Edad </h5>
-    <input type="email" name="correo" id="correo"required>
+    <input type="text" name="edad" id="edad"required>
+    <h5> Función </h5>
+    <input type="text" name="evento" id="evento" required>
+    <h5> Hora: </h5>
+    <input text="text" name="hora" id="hora" required>
+    <input type="hidden" id="fechaCompra" name="fechaCompra">
+    <input type="hidden" id="precio" name="precio">
+    <input type="hidden" id="descuento" name="descuento">
+    
   <h5>¿Es socio?</h5>
     <input type="text" id="socio" name="socio" disabled><br>
-    <br>
-  
-    <button type="submit"  >Crear entrada</button>
-  
+   <div class="botones-entradas"> 
+    <button type="submit" id="plateaB" >Entrada platea</button><br>
+    <button type="submit" id="galeriaB"  >Entrada galería</button><br>
+    <button type="submit"  id="palcoB">Entrada palco</button>
+   </div>
   </form>
+
+  
+    <div class="container">
+   <ul class="showcase">
+
+    <li>
+      
+    <div class="seat"> </div>
+      
+      <small> Disponibles</small>
+    </li>
+    <li>
+      <div class="seat selected"></div>
+        <small> Seleccionado</small>
+
+    </li>
+    <li>
+      <div class="seat sold"></div>
+        <small> Vendido</small>
+    </li>
+</ul>    
+      <div class="screen"></div>
+    <div class="row">
+      <div class="seat"></div>
+            <div class="seat"></div>
+                  <div class="seat"></div>
+                        <div class="seat"></div>
+                              <div class="seat"></div>
+                                    <div class="seat"></div>
+                                          <div class="seat"></div>
+                                                <div class="seat"></div>
+    </div>
+      <div class="row">
+      <div class="seat sold"></div>
+            <div class="seat sold"></div>
+                  <div class="seat "></div>
+                        <div class="seat "></div>
+                              <div class="seat "></div>
+                                    <div class="seat   "></div>
+                                          <div class="seat sold"></div>
+                                                <div class="seat sold"></div>
+      </div>
+                                                  <div class="row">
+      <div class="seat"></div>
+            <div class="seat"></div>
+                  <div class="seat"></div>
+                        <div class="seat"></div>
+                              <div class="seat"></div>
+                                    <div class="seat"></div>
+                                          <div class="seat"></div>
+                                                <div class="seat"></div>
+    </div>
+  
+<p class="text">Usted ha eleccionado 0<span id="count"></span> asientos, su total es de $<span id="total">0</span> </p>
+  
+    <br>
+  </div>
+  
+
      
   <h2>Entradas</h2>
   <div id="lista-archivos" class=" mt-3"></div>
