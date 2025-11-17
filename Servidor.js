@@ -190,24 +190,40 @@ app.delete('/eliminarPL/:id',(req,res)=>{
     }
 });  
 
-app.post('/generarPlatea', async (req, res) => {
-  const { rut, nombre, ApellidoP, ApellidoM, telefono, correo, edad, evento, hora } = req.body;
-const fechaCompra = new Date().toLocaleString('es-CL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-});
 
- try {
+app.post('/generarPlatea', async (req, res) => {
+  const { 
+    rut, nombre, ApellidoP, ApellidoM, telefono, correo, edad,
+    evento, hora,fecha_funcion, numero_asiento, precio_asiento, total_pagar
+  } = req.body;
+
+  const fechaCompra = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  try {
+
+    const result = await pool.query(
+      `INSERT INTO entradas_platea 
+      (rut_del_cliente, nombre_cliente, apellido_paterno, apellido_materno,
+       telefono, correo, edad, evento, hora_funcion,fecha_funcion, fecha_compra,
+       numero_asiento, precio, valor)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+      RETURNING *`,
+      [
+        rut, nombre, ApellidoP, ApellidoM,
+        telefono, correo, edad, evento,
+        hora,fecha_funcion, fechaCompra,
+        numero_asiento, precio_asiento, total_pagar
+      ]
+    );
+
+    // Crear HTML
     const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrada Palco</title>
+  <title>Entrada Platea</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="entradaP.css">
 </head>
@@ -215,7 +231,7 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
 <header><img src="22d5227b-d92e-4ec6-a145-940773c65afe.png" width="250"></header>
 <div class="divisor">
   <div class="divMini">
-    <h1>Entrada Palco</h1>
+    <h1>Entrada Platea</h1>
     <h5>RUT: ${rut}</h5>
     <h5>Nombre: ${nombre}</h5>
     <h5>Apellido Paterno: ${ApellidoP}</h5>
@@ -225,19 +241,25 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
     <h5>Edad: ${edad}</h5>
     <h5>Evento: ${evento}</h5>
     <h5>Hora: ${hora}</h5>
-    <h5>Fecha de compra: ${fechaCompra}</h5> 
-    <h5>Precio: </h5>
-    <h5>Descuento: </h5>
+    <h5>Fecha función: ${fecha_funcion}</h5>
+    <h5>Fecha de compra: ${fechaCompra}</h5>
+    <h5>Asiento: ${numero_asiento}</h5>
+    <h5>Precio: $${precio_asiento}</h5>
+    <h5>Total pagado: $${total_pagar}</h5>
   </div>
 </div>
 </body>
 </html>`;
 
-
     const filePath = path.join(__dirname, 'Entradas', `${nombre}_Platea.html`);
     fs.writeFileSync(filePath, html, 'utf8');
 
-    res.json({ mensaje: 'HTML generado correctamente', url: `/Entradas/${nombre}_Platea.html` });
+  
+    res.json({
+      mensaje: 'Entrada generada correctamente',
+      entrada: result.rows[0],
+      url: `/Entradas/${nombre}_Platea.html`
+    });
 
   } catch (error) {
     console.error(error);
@@ -247,15 +269,31 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
 
 
 app.post('/generarPalco', async (req, res) => {
-  const { rut, nombre, ApellidoP, ApellidoM, telefono, correo, edad, evento, hora } = req.body;
-const fechaCompra = new Date().toLocaleString('es-CL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-});
+     const { 
+    rut, nombre, ApellidoP, ApellidoM, telefono, correo, edad,
+    evento, hora,fecha_funcion, numero_asiento, precio_asiento, total_pagar
+  } = req.body;
+
+  const fechaCompra = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
   try {
+
+    const result = await pool.query(
+      `INSERT INTO entradas_palco 
+      (rut_del_cliente, nombre_cliente, apellido_paterno, apellido_materno,
+       telefono, correo, edad, evento, hora_funcion,fecha_funcion, fecha_compra,
+       numero_asiento, precio, valor)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+      RETURNING *`,
+      [
+        rut, nombre, ApellidoP, ApellidoM,
+        telefono, correo, edad, evento,
+        hora,fecha_funcion, fechaCompra,
+        numero_asiento, precio_asiento, total_pagar
+      ]
+    );
+
+  
     const html = `
 <!DOCTYPE html>
 <html lang="es">
@@ -280,9 +318,11 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
     <h5>Edad: ${edad}</h5>
     <h5>Evento: ${evento}</h5>
     <h5>Hora: ${hora}</h5>
-    <h5>Fecha de compra: ${fechaCompra} </h5> 
-    <h5>Precio: </h5>
-    <h5>Descuento: </h5>
+    <h5>Fecha función: ${fecha_funcion}</h5>
+    <h5>Fecha de compra: ${fechaCompra}</h5>
+    <h5>Asiento: ${numero_asiento}</h5>
+    <h5>Precio: $${precio_asiento}</h5>
+    <h5>Total pagado: $${total_pagar}</h5>
   </div>
 </div>
 </body>
@@ -291,7 +331,12 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
     const filePath = path.join(__dirname, 'Entradas', `${nombre}_Palco.html`);
     fs.writeFileSync(filePath, html, 'utf8');
 
-    res.json({ mensaje: 'HTML generado correctamente', url: `/Entradas/${nombre}_Palco.html` });
+  
+    res.json({
+      mensaje: 'Entrada generada correctamente',
+      entrada: result.rows[0],
+      url: `/Entradas/${nombre}_Palco.html`
+    });
 
   } catch (error) {
     console.error(error);
@@ -300,7 +345,8 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
 });
 
 
-app.post('/generarGaleria', async (req, res) => {
+
+app.post('/generarGraderia', async (req, res) => {
   const { rut, nombre, ApellidoP, ApellidoM, telefono, correo, edad, evento, hora } = req.body;
 const fechaCompra = new Date().toLocaleString('es-CL', {
     day: '2-digit',
@@ -316,7 +362,7 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrada Galeria</title>
+  <title>Entrada Graderia</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="entradaG.css">
 </head>
@@ -342,7 +388,7 @@ const fechaCompra = new Date().toLocaleString('es-CL', {
 </body>
 </html>`;
 
-    const filePath = path.join(__dirname, 'Entradas', `${nombre}_Galeria.html`);
+    const filePath = path.join(__dirname, 'Entradas', `${nombre}_Graderia.html`);
     fs.writeFileSync(filePath, html, 'utf8');
 
     res.json({ mensaje: 'HTML generado correctamente', url: `/Entradas/${nombre}_Palco.html` });

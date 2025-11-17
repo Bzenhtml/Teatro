@@ -27,84 +27,180 @@
     <input type="text" name="telefono" id="telefono" required>
     <h5> Correo</h5>
     <input type="email" name="correo" id="correo"required>
-    <h5> Fecha de nacimiento </h5>
-    <input type="date" >
-     <h5>Edad </h5>
-    <input type="text" name="edad" id="edad"required>
+   <h5>Fecha de nacimiento:</h5>
+<input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+
+<h5>Edad:</h5>
+<input type="number" id="edad" name="edad" required disabled>
     <h5> Función </h5>
     <input type="text" name="evento" id="evento" required>
     <h5> Hora: </h5>
     <input text="text" name="hora" id="hora" required>
+    <br>
+      <h5> Fecha de función:</h5>
+    <input type="date" id="fecha_funcion" name="fecha_funcion">
     <input type="hidden" id="fechaCompra" name="fechaCompra">
     <input type="hidden" id="precio" name="precio">
     <input type="hidden" id="descuento" name="descuento">
-    
+    <br>
+    <h5> Asiento seleccionado:</h5>
+    <input type="text" id="asiento_seleccionado" >
+    <input type="hidden" id="numero_asiento" name="numero_asiento">
+    <input type="hidden" id="precio_asiento" name="precio_asiento">
+
+<div class="container">
+
+  <ul class="showcase">
+    <li>
+      <div class="seat legend"></div>
+      <small>Disponibles</small>
+    </li>
+    <li>
+      <div class="seat legend selected"></div>
+      <small>Seleccionado</small>
+    </li>
+    <li>
+      <div class="seat legend sold"></div>
+      <small>Vendido</small>
+    </li>
+  </ul>
+  <div class="secciones-container">
+
+   
+    <div class="seccion">
+        <h3>PLATEA</h3>
+
+        <div id="asientos-platea" class="mapa-asientos">
+            <div class="row">
+                <div class="seat" data-seat="A1"></div>
+                <div class="seat" data-seat="A2"></div>
+                <div class="seat" data-seat="A3"></div>
+                <div class="seat" data-seat="A4"></div>
+                <div class="seat" data-seat="A5"></div>
+                <div class="seat" data-seat="A6"></div>
+                <div class="seat" data-seat="A7"></div>
+                <div class="seat" data-seat="A8"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="B1"></div>
+                <div class="seat" data-seat="B2"></div>
+                <div class="seat" data-seat="B3"></div>
+                <div class="seat" data-seat="B4"></div>
+                <div class="seat" data-seat="B5"></div>
+                <div class="seat" data-seat="B6"></div>
+                <div class="seat" data-seat="B7"></div>
+                <div class="seat" data-seat="B8"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="C1"></div>
+                <div class="seat" data-seat="C2"></div>
+                <div class="seat" data-seat="C3"></div>
+                <div class="seat" data-seat="C4"></div>
+                <div class="seat" data-seat="C5"></div>
+                <div class="seat" data-seat="C6"></div>
+                <div class="seat" data-seat="C7"></div>
+                <div class="seat" data-seat="C8"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="seccion">
+        <h3>GRADERÍA</h3>
+
+        <div id="asientos-graderia" class="mapa-asientos">
+            <div class="row">
+                <div class="seat" data-seat="G1"></div>
+                <div class="seat" data-seat="G2"></div>
+                <div class="seat" data-seat="G3"></div>
+                <div class="seat" data-seat="G4"></div>
+                <div class="seat" data-seat="G5"></div>
+                <div class="seat" data-seat="G6"></div>
+                <div class="seat" data-seat="G7"></div>
+                <div class="seat" data-seat="G8"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="G9"></div>
+                <div class="seat" data-seat="G10"></div>
+                <div class="seat" data-seat="G11"></div>
+                <div class="seat" data-seat="G12"></div>
+                <div class="seat" data-seat="G13"></div>
+                <div class="seat" data-seat="G14"></div>
+                <div class="seat" data-seat="G15"></div>
+                <div class="seat" data-seat="G16"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="G17"></div>
+                <div class="seat" data-seat="G18"></div>
+                <div class="seat" data-seat="G19"></div>
+                <div class="seat" data-seat="G20"></div>
+                <div class="seat" data-seat="G21"></div>
+                <div class="seat" data-seat="G22"></div>
+                <div class="seat" data-seat="G23"></div>
+                <div class="seat" data-seat="G24"></div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class="seccion">
+        <h3>PALCO</h3>
+
+        <div id="asientos-palco" class="mapa-asientos">
+            <div class="row">
+                <div class="seat" data-seat="P1"></div>
+                <div class="seat" data-seat="P2"></div>
+                <div class="seat" data-seat="P3"></div>
+                <div class="seat" data-seat="P4"></div>
+                <div class="seat" data-seat="P5"></div>
+                <div class="seat" data-seat="P6"></div>
+                <div class="seat" data-seat="P7"></div>
+                <div class="seat" data-seat="P8"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="P9"></div>
+                <div class="seat" data-seat="P10"></div>
+                <div class="seat" data-seat="P11"></div>
+                <div class="seat" data-seat="P12"></div>
+                <div class="seat" data-seat="P13"></div>
+                <div class="seat" data-seat="P14"></div>
+                <div class="seat" data-seat="P15"></div>
+                <div class="seat" data-seat="P16"></div>
+            </div>
+            <div class="row">
+                <div class="seat" data-seat="P17"></div>
+                <div class="seat" data-seat="P18"></div>
+                <div class="seat" data-seat="P19"></div>
+                <div class="seat" data-seat="P20"></div>
+                <div class="seat" data-seat="P21"></div>
+                <div class="seat" data-seat="P22"></div>
+                <div class="seat" data-seat="P23"></div>
+                <div class="seat" data-seat="P24"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+ 
+
+
+
+  <p class="text">Usted ha seleccionado <span id="count">0</span> asientos, su total es de $<span id="total">0</span></p>
+
+</div>
+    <input type="hidden" id="total_pagar" name="total_pagar">
+<br>
+<br>
+<br>
   <h5>¿Es socio?</h5>
     <input type="text" id="socio" name="socio" disabled><br>
    <div class="botones-entradas"> 
     <button type="submit" id="plateaB" >Entrada platea</button><br>
-    <button type="submit" id="galeriaB"  >Entrada galería</button><br>
+    <button type="submit" id="graderiaB"  >Entrada gradería</button><br>
     <button type="submit"  id="palcoB">Entrada palco</button>
    </div>
   </form>
 
-  
-    <div class="container">
-   <ul class="showcase">
-
-    <li>
-      
-    <div class="seat"> </div>
-      
-      <small> Disponibles</small>
-    </li>
-    <li>
-      <div class="seat selected"></div>
-        <small> Seleccionado</small>
-
-    </li>
-    <li>
-      <div class="seat sold"></div>
-        <small> Vendido</small>
-    </li>
-</ul>    
-      <div class="screen"></div>
-    <div class="row">
-      <div class="seat"></div>
-            <div class="seat"></div>
-                  <div class="seat"></div>
-                        <div class="seat"></div>
-                              <div class="seat"></div>
-                                    <div class="seat"></div>
-                                          <div class="seat"></div>
-                                                <div class="seat"></div>
-    </div>
-      <div class="row">
-      <div class="seat sold"></div>
-            <div class="seat sold"></div>
-                  <div class="seat "></div>
-                        <div class="seat "></div>
-                              <div class="seat "></div>
-                                    <div class="seat   "></div>
-                                          <div class="seat sold"></div>
-                                                <div class="seat sold"></div>
-      </div>
-                                                  <div class="row">
-      <div class="seat"></div>
-            <div class="seat"></div>
-                  <div class="seat"></div>
-                        <div class="seat"></div>
-                              <div class="seat"></div>
-                                    <div class="seat"></div>
-                                          <div class="seat"></div>
-                                                <div class="seat"></div>
-    </div>
-  
-<p class="text">Usted ha eleccionado 0<span id="count"></span> asientos, su total es de $<span id="total">0</span> </p>
-  
-    <br>
-  </div>
-  
 
      
   <h2>Entradas</h2>
